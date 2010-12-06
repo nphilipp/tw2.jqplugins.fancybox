@@ -18,8 +18,6 @@ setup(
     entry_points="""
         [toscawidgets.widgets]
         widgets = tw.jquery.fancybox
-        #samples = tw.jquery.fancybox.samples
-        #resource = tw.jquery.fancybox.resources
     """,
     keywords = ["toscawidgets.widgets"],
     classifiers = [
