@@ -29,11 +29,15 @@ __all__ = ("mousewheel_js", "fancybox_js", "fancybox_css", "FancyBox")
 
 FANCYBOX_VERSION = "1.3.4"
 MOUSEWHEEL_VERSION = "3.0.4"
+EASING_VERSION = "1.3"
 
 # JS Links
 
 mousewheel_js = JSLink(modname=__name__,
         filename="static/jquery.mousewheel-%s.pack.js" % MOUSEWHEEL_VERSION)
+
+easing_js = JSLink(modname=__name__,
+        filename="static/jquery.easing-%s.pack.js" % EASING_VERSION)
 
 fancybox_js = JSLink(modname=__name__,
         filename="static/jquery.fancybox-%s.pack.js" % FANCYBOX_VERSION)
@@ -50,8 +54,8 @@ static_resources = Link(modname=__name__, filename="static", whole_dir=True)
 # Widget
 
 class FancyBox(Widget):
-    resources = [fancybox_css, jquery_js, mousewheel_js, fancybox_js,
-            static_resources]
+    resources = [fancybox_css, jquery_js, mousewheel_js, easing_js,
+            fancybox_js, static_resources]
 
     fancybox_attrnames = (
             'padding', 'margin', 'opacity', 'modal', 'cyclic', 'scrolling',
