@@ -1,0 +1,5 @@
+build
+dist
+tw2.jqplugins.fancybox.egg-info
+*.pyc
+*.pyo
