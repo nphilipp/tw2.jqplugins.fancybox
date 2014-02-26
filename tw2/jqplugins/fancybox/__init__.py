@@ -19,10 +19,10 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 import pkg_resources
+pkg_resources.require("tw2.core >= 2.0")
 pkg_resources.require("tw2.jquery >= 2.0")
 
-from tw2.core import Widget, JSLink, CSSLink, Link
-import tw2.core as twc
+from tw2.core import Widget, JSLink, CSSLink, Link, Param
 from tw2.jquery.base import jquery_js, jQuery
 
 __all__ = ("mousewheel_js", "fancybox_js", "fancybox_css", "FancyBox")
@@ -68,100 +68,100 @@ class FancyBox(Widget):
             'showCloseButton', 'showNavArrows', 'enableEscapeButton',
             'onStart', 'onCancel', 'onComplete', 'onCleanup', 'onClosed')
 
-    selector = twc.Param("Selector specifying images to be decorated")
+    selector = Param("Selector specifying images to be decorated")
 
-    padding = twc.Param("Space between FancyBox wrapper and content")
+    padding = Param("Space between FancyBox wrapper and content")
 
-    margin = twc.Param("Space between viewport and FancyBox wrapper")
+    margin = Param("Space between viewport and FancyBox wrapper")
 
-    opacity = twc.Param("When True, transparency of content is changed "
+    opacity = Param("When True, transparency of content is changed "
                         "for elastic transitions")
 
-    modal = twc.Param("When True, 'overlayShow' is set to True and "
+    modal = Param("When True, 'overlayShow' is set to True and "
                       "'hideOnOverlayClick', 'hideOnContentClick', "
                       "'enableEscapeButton', 'showCloseButton' "
                       "are set to False")
 
-    cyclic = twc.Param("When True, galleries will be cyclic, allowing you to "
+    cyclic = Param("When True, galleries will be cyclic, allowing you to "
                        "keep pressing next/back.")
 
-    scrolling = twc.Param("Set the overflow CSS property to create or hide "
+    scrolling = Param("Set the overflow CSS property to create or hide "
                           "scrollbars. Can be set to 'auto', 'yes', or 'no'")
 
-    width = twc.Param("Width for content types 'iframe' and 'swf'. Also set "
+    width = Param("Width for content types 'iframe' and 'swf'. Also set "
                       "for inline content if 'autoDimensions' is set to False")
 
-    height = twc.Param("Height for content types 'iframe' and 'swf'. Also set "
+    height = Param("Height for content types 'iframe' and 'swf'. Also set "
                        "for inline content if 'autoDimensions' is set to False")
 
-    autoScale = twc.Param("If True, FancyBox is scaled to fit in viewport")
+    autoScale = Param("If True, FancyBox is scaled to fit in viewport")
 
-    autoDimensions = twc.Param("For inline and ajax views, resizes the view "
+    autoDimensions = Param("For inline and ajax views, resizes the view "
                                "to the element received. Make sure it has "
                                "dimensions otherwise this will give "
                                "unexpected results")
 
-    centerOnScroll = twc.Param("When True, FancyBox is centered while "
+    centerOnScroll = Param("When True, FancyBox is centered while "
                                "scrolling page")
 
-    ajax = twc.Param("Ajax options. Note: 'error' and 'success' will be "
+    ajax = Param("Ajax options. Note: 'error' and 'success' will be "
                      "overwritten by FancyBox")
 
-    swf = twc.Param("Params to put on the swf object")
+    swf = Param("Params to put on the swf object")
 
-    hideOnOverlayClick = twc.Param("Toggle if clicking the overlay should "
+    hideOnOverlayClick = Param("Toggle if clicking the overlay should "
                                    "close FancyBox")
 
-    hideOnContentClick = twc.Param("Toggle if clicking the content should "
+    hideOnContentClick = Param("Toggle if clicking the content should "
                                    "close FancyBox")
 
-    overlayShow = twc.Param("Toggle overlay")
+    overlayShow = Param("Toggle overlay")
 
-    overlayOpacity = twc.Param("Opacity of the overlay (from 0 to 1; "
+    overlayOpacity = Param("Opacity of the overlay (from 0 to 1; "
                                "default - 0.3)")
 
-    overlayColor = twc.Param("Color of the overlay")
+    overlayColor = Param("Color of the overlay")
 
-    titleShow = twc.Param("Toggle title")
+    titleShow = Param("Toggle title")
 
-    titlePosition = twc.Param("The position of title. Can be set to "
+    titlePosition = Param("The position of title. Can be set to "
                               "'outside', 'inside' or 'over'")
 
-    titleFormat = twc.Param("Callback to customize title area. You can set "
+    titleFormat = Param("Callback to customize title area. You can set "
                             "any html - custom image counter or even custom "
                             "navigation")
 
-    transitionIn = transitionOut = twc.Param(
+    transitionIn = transitionOut = Param(
             "The transition type. Can be set to 'elastic', 'fade' or 'none'")
 
-    speedIn = speedOut = twc.Param(
+    speedIn = speedOut = Param(
             "Speed of the fade and elastic transitions, in milliseconds")
 
-    changeSpeed = twc.Param("Speed of resizing when changing gallery items, "
+    changeSpeed = Param("Speed of resizing when changing gallery items, "
                             "in milliseconds")
 
-    changeFade = twc.Param("Speed of the content fading while changing "
+    changeFade = Param("Speed of the content fading while changing "
                            "gallery items")
 
-    easingIn = easingOut = twc.Param("Easing used for elastic animations")
+    easingIn = easingOut = Param("Easing used for elastic animations")
 
-    showCloseButton = twc.Param("Toggle close button")
+    showCloseButton = Param("Toggle close button")
 
-    showNavArrows = twc.Param("Toggle navigation arrows")
+    showNavArrows = Param("Toggle navigation arrows")
 
-    enableEscapeButton = twc.Param("Toggle if pressing Esc button closes "
+    enableEscapeButton = Param("Toggle if pressing Esc button closes "
                                    "FancyBox")
 
-    onStart = twc.Param("Will be called right before attempting to load "
+    onStart = Param("Will be called right before attempting to load "
                         "the content")
 
-    onCancel = twc.Param("Will be called after loading is canceled")
+    onCancel = Param("Will be called after loading is canceled")
 
-    onComplete = twc.Param("Will be called once the content is displayed")
+    onComplete = Param("Will be called once the content is displayed")
 
-    onCleanup = twc.Param("Will be called just before closing")
+    onCleanup = Param("Will be called just before closing")
 
-    onClosed = twc.Param("Will be called once FancyBox is closed")
+    onClosed = Param("Will be called once FancyBox is closed")
 
     def prepare(self):
         super(FancyBox, self).prepare()
