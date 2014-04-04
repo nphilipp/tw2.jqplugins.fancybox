@@ -62,7 +62,7 @@ class FancyBox(Widget):
             'width', 'height', 'autoScale', 'autoDimensions', 'centerOnScroll',
             'ajax', 'swf', 'hideOnOverlayClick', 'hideOnContentClick',
             'overlayShow', 'overlayOpacity', 'overlayColor',
-            'titleShow', 'titlePosition', 'titleFormat',
+            'titleShow', 'titlePosition', 'titleFromAlt', 'titleFormat',
             'transitionIn', 'transitionOut', 'speedIn', 'speedOut',
             'changeSpeed', 'changeFade', 'easingIn', 'easingOut',
             'showCloseButton', 'showNavArrows', 'enableEscapeButton',
@@ -126,6 +126,8 @@ class FancyBox(Widget):
 
     titlePosition = Param("The position of title. Can be set to "
                               "'outside', 'inside' or 'over'")
+
+    titleFromAlt = Param("Whether to use the alt property for the title.")
 
     titleFormat = Param("Callback to customize title area. You can set "
                             "any html - custom image counter or even custom "
