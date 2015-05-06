@@ -53,6 +53,10 @@ static_resources = Link(modname=__name__, filename="static", whole_dir=True)
 
 # Widget
 
+def NDParam(*p, **k):
+    k.setdefault('default', None)
+    return Param(*p, **k)
+
 class FancyBox(Widget):
     resources = [fancybox_css, jquery_js, mousewheel_js, easing_js,
             fancybox_js, static_resources]
@@ -70,132 +74,134 @@ class FancyBox(Widget):
 
     selector = Param("Selector specifying images to be decorated")
 
-    padding = Param("Space between FancyBox wrapper and content")
+    padding = NDParam("Space between FancyBox wrapper and content")
 
-    margin = Param("Space between viewport and FancyBox wrapper")
+    margin = NDParam("Space between viewport and FancyBox wrapper")
 
-    opacity = Param("When True, transparency of content is changed "
+    opacity = NDParam("When True, transparency of content is changed "
                         "for elastic transitions")
 
-    modal = Param("When True, 'overlayShow' is set to True and "
+    modal = NDParam("When True, 'overlayShow' is set to True and "
                       "'hideOnOverlayClick', 'hideOnContentClick', "
                       "'enableEscapeButton', 'showCloseButton' "
                       "are set to False")
 
-    cyclic = Param("When True, galleries will be cyclic, allowing you to "
+    cyclic = NDParam("When True, galleries will be cyclic, allowing you to "
                        "keep pressing next/back.")
 
-    scrolling = Param("Set the overflow CSS property to create or hide "
+    scrolling = NDParam("Set the overflow CSS property to create or hide "
                           "scrollbars. Can be set to 'auto', 'yes', or 'no'")
 
-    width = Param("Width for content types 'iframe' and 'swf'. Also set "
+    width = NDParam("Width for content types 'iframe' and 'swf'. Also set "
                       "for inline content if 'autoDimensions' is set to False")
 
-    height = Param("Height for content types 'iframe' and 'swf'. Also set "
+    height = NDParam("Height for content types 'iframe' and 'swf'. Also set "
                        "for inline content if 'autoDimensions' is set to False")
 
-    autoScale = Param("If True, FancyBox is scaled to fit in viewport")
+    autoScale = NDParam("If True, FancyBox is scaled to fit in viewport")
 
-    autoDimensions = Param("For inline and ajax views, resizes the view "
+    autoDimensions = NDParam("For inline and ajax views, resizes the view "
                                "to the element received. Make sure it has "
                                "dimensions otherwise this will give "
                                "unexpected results")
 
-    centerOnScroll = Param("When True, FancyBox is centered while "
+    centerOnScroll = NDParam("When True, FancyBox is centered while "
                                "scrolling page")
 
-    ajax = Param("Ajax options. Note: 'error' and 'success' will be "
+    ajax = NDParam("Ajax options. Note: 'error' and 'success' will be "
                      "overwritten by FancyBox")
 
-    swf = Param("Params to put on the swf object")
+    swf = NDParam("Params to put on the swf object")
 
-    hideOnOverlayClick = Param("Toggle if clicking the overlay should "
+    hideOnOverlayClick = NDParam("Toggle if clicking the overlay should "
                                    "close FancyBox")
 
-    hideOnContentClick = Param("Toggle if clicking the content should "
+    hideOnContentClick = NDParam("Toggle if clicking the content should "
                                    "close FancyBox")
 
-    overlayShow = Param("Toggle overlay")
+    overlayShow = NDParam("Toggle overlay")
 
-    overlayOpacity = Param("Opacity of the overlay (from 0 to 1; "
+    overlayOpacity = NDParam("Opacity of the overlay (from 0 to 1; "
                                "default - 0.3)")
 
-    overlayColor = Param("Color of the overlay")
+    overlayColor = NDParam("Color of the overlay")
 
-    titleShow = Param("Toggle title")
+    titleShow = NDParam("Toggle title")
 
-    titlePosition = Param("The position of title. Can be set to "
+    titlePosition = NDParam("The position of title. Can be set to "
                               "'outside', 'inside' or 'over'")
 
-    titleFromAlt = Param("Whether to use the alt property for the title.")
+    titleFromAlt = NDParam("Whether to use the alt property for the title.")
 
-    titleFormat = Param("Callback to customize title area. You can set "
+    titleFormat = NDParam("Callback to customize title area. You can set "
                             "any html - custom image counter or even custom "
                             "navigation")
 
-    transitionIn = transitionOut = Param(
+    transitionIn = transitionOut = NDParam(
             "The transition type. Can be set to 'elastic', 'fade' or 'none'")
 
-    speedIn = speedOut = Param(
+    speedIn = speedOut = NDParam(
             "Speed of the fade and elastic transitions, in milliseconds")
 
-    changeSpeed = Param("Speed of resizing when changing gallery items, "
+    changeSpeed = NDParam("Speed of resizing when changing gallery items, "
                             "in milliseconds")
 
-    changeFade = Param("Speed of the content fading while changing "
+    changeFade = NDParam("Speed of the content fading while changing "
                            "gallery items")
 
-    easingIn = easingOut = Param("Easing used for elastic animations")
+    easingIn = easingOut = NDParam("Easing used for elastic animations")
 
-    showCloseButton = Param("Toggle close button")
+    showCloseButton = NDParam("Toggle close button")
 
-    showNavArrows = Param("Toggle navigation arrows")
+    showNavArrows = NDParam("Toggle navigation arrows")
 
-    enableEscapeButton = Param("Toggle if pressing Esc button closes "
+    enableEscapeButton = NDParam("Toggle if pressing Esc button closes "
                                    "FancyBox")
 
-    onStart = Param("Will be called right before attempting to load "
+    onStart = NDParam("Will be called right before attempting to load "
                         "the content")
 
-    onCancel = Param("Will be called after loading is canceled")
+    onCancel = NDParam("Will be called after loading is canceled")
 
-    onComplete = Param("Will be called once the content is displayed")
+    onComplete = NDParam("Will be called once the content is displayed")
 
-    onCleanup = Param("Will be called just before closing")
+    onCleanup = NDParam("Will be called just before closing")
 
-    onClosed = Param("Will be called once FancyBox is closed")
+    onClosed = NDParam("Will be called once FancyBox is closed")
+
+    template = ""
 
     def prepare(self):
         super(FancyBox, self).prepare()
         if not self.selector:
             raise ValueError("FancyBox needs a selector")
 
-        if (hasattr(self, 'scrolling') and
+        if (getattr(self, 'scrolling', None) and
             self.scrolling not in ('auto', 'yes', 'no')):
             raise ValueError("Scrolling must be 'auto', 'yes' or 'no'")
 
-        if (hasattr(self, 'overlayOpacity') and
+        if (getattr(self, 'overlayOpacity', None) and
             not (0.0 < float(self.overlayOpacity) < 1.0)):
             raise ValueError("Overlay opacity must be between 0.0 and 1.0")
 
-        if (hasattr(self, 'titlePosition') and
+        if (getattr(self, 'titlePosition', None) and
             self.titlePosition not in ('outside', 'inside', 'over')):
             raise ValueError("Title position must be 'outside', 'inside' "
                              "or 'over'")
 
-        if (hasattr(self, 'transitionIn') and
+        if (getattr(self, 'transitionIn', None) and
             self.transitionIn not in ('elastic', 'fade', 'none')):
             raise ValueError("In transition must be 'elastic', 'fade' or "
                              "'none'")
 
-        if (hasattr(self, "transitionOut") and
+        if (getattr(self, "transitionOut", None) and
             self.transitionOut not in ('elastic', 'fade', 'none')):
             raise ValueError("Out transition must be 'elastic', 'fade' or "
                              "'none'")
 
         params = {}
         for name in self.fancybox_attrnames:
-            if hasattr(self, name):
+            if getattr(self, name, None):
                 params[name] = getattr(self, name)
 
         call = jQuery(self.selector).fancybox(params)
