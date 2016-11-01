@@ -577,8 +577,8 @@
 
 		_finish = function () {
 			if (!$.support.opacity) {
-				content.get(0).style.removeAttribute('filter');
-				wrap.get(0).style.removeAttribute('filter');
+				$(content.get(0)).css('filter', '');
+				$(wrap.get(0)).css('filter', '');
 			}
 
 			if (selectedOpts.autoDimensions) {
